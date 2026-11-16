@@ -1,4 +1,4 @@
-# Nftify — Domain-Specific RAG Question-Answering System
+# Nftify: Domain-Specific RAG Question-Answering System
 ### Grounded AI answers from a curated NFTI knowledge base
 
 ![Python](https://img.shields.io/badge/Python-3.8+-blue)
@@ -11,7 +11,7 @@
 
 ## Overview
 
-Nftify is a domain-specific AI assistant built on a full Retrieval-Augmented Generation pipeline. It answers questions about Click-On Kaduna, the DSFP programme, and NFTI using a curated knowledge base — eliminating the hallucination problem that makes generic LLMs unreliable for specialised queries.
+Nftify is a domain-specific AI assistant built on a full Retrieval-Augmented Generation pipeline. It answers questions about Click-On Kaduna, the DSFP programme, and NFTI using a curated knowledge base, eliminating the hallucination problem that makes generic LLMs unreliable for specialised queries.
 
 Instead of asking a general-purpose LLM to recall facts it may have never seen, Nftify retrieves the most relevant content from a vector-indexed knowledge base first, then generates a grounded, source-backed answer.
 
@@ -19,7 +19,7 @@ Instead of asking a general-purpose LLM to recall facts it may have never seen, 
 
 ## Live Demo
 
-🔗 [nftifybot.streamlit.app](https://nftifybot.streamlit.app)
+[nftifybot.streamlit.app](https://nftifybot.streamlit.app)
 
 ---
 
@@ -27,7 +27,7 @@ Instead of asking a general-purpose LLM to recall facts it may have never seen, 
 
 Generic LLMs have no reliable knowledge of niche programmes like NFTI or Click-On Kaduna. When asked, they either hallucinate plausible-sounding but wrong answers, or admit they do not know. Neither is useful.
 
-Nftify fixes this by grounding every answer in a verified, domain-specific knowledge base. If the answer is not in the knowledge base, Nftify says so — it does not invent one.
+Nftify fixes this by grounding every answer in a verified, domain-specific knowledge base. If the answer is not in the knowledge base, Nftify says so, it does not invent one.
 
 ---
 
@@ -56,7 +56,7 @@ Web scraping with Trafilatura to extract clean text from NFTI-related pages. Raw
 RecursiveCharacterTextSplitter with 900-character chunks and 150-character overlap. Overlap prevents context loss at chunk boundaries.
 
 **3. Embedding and Indexing**
-Sentence Transformers (all-MiniLM-L6-v2) for dense vector embeddings. ChromaDB for in-memory vector storage and similarity search. Embeddings cached on first load — no recomputation on repeat queries.
+Sentence Transformers (all-MiniLM-L6-v2) for dense vector embeddings. ChromaDB for in-memory vector storage and similarity search. Embeddings cached on first load, no recomputation on repeat queries.
 
 **4. Retrieval**
 Semantic similarity search returns top-K most relevant chunks. Adjustable retrieval size (3–8 sources) via UI slider.
@@ -79,13 +79,13 @@ Retrieved chunks assembled into a structured prompt. Gemini 2.5 Flash generates 
 ## Key Design Decisions
 
 **Why RAG over fine-tuning?**
-Fine-tuning is expensive, slow to update, and still hallucinates. RAG is modular — update the knowledge base without retraining anything.
+Fine-tuning is expensive, slow to update, and still hallucinates. RAG is modular, update the knowledge base without retraining anything.
 
 **Why all-MiniLM-L6-v2?**
 Fast, lightweight, and strong on semantic similarity for short to medium text chunks. Runs without a GPU.
 
 **Why ChromaDB?**
-Simple and infrastructure-free. Currently configured as an in-memory store — the index rebuilds from the JSONL knowledge base on each server session. Streamlit's @st.cache_resource decorator ensures the index is shared across users and only rebuilt on cold start, not on every query. A persistent ChromaDB client is the next planned upgrade.
+Simple and infrastructure-free. Currently configured as an in-memory store, the index rebuilds from the JSONL knowledge base on each server session. Streamlit's @st.cache_resource decorator ensures the index is shared across users and only rebuilt on cold start, not on every query. A persistent ChromaDB client is the next planned upgrade.
 
 **Why chunk overlap?**
 Answers often span chunk boundaries. 150-character overlap ensures no key sentence is split across two non-adjacent chunks.
@@ -109,11 +109,11 @@ Answers often span chunk boundaries. 150-character overlap ensures no key senten
 ## Author
 
 **Mubarak Adesola Adedeji**
-Data Analyst · AI Developer | Python · SQL · R · Power BI
+Data Analyst | Python · SQL · R · Power BI
 [LinkedIn](https://linkedin.com/in/mubarak-adedeji-776804273) · [GitHub](https://github.com/Mubydeji)
 
 ---
 
 ## License
 
-MIT License — free to use, adapt, and build on with attribution.
+MIT License, free to use, adapt, and build on with attribution.
